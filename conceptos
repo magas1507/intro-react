@@ -1,0 +1,232 @@
+Si React es tu primera libería de JavaScript, debes saber que muchas de las librerías están basadas en componentes, pero… ¿Realmente qué significa un “componente”? Si ya has tomado el Curso Básico de Web Components con JavaScript pues el concepto es prácticamente el mismo, pero aplicados a React. Pero si es la primera vez que escuchas sobre componentes…
+.
+☝ Básicamente un componente es un pedacito de tu página web, es decir, puede ser una sección específica de tu página web, o puede ser algún elemento que se repita múltiples veces en la misma. Lo importante a tener en cuenta es que, un componente es una parte específica de tu página, es algo que cumple una acción simple 👀.
+.
+¿El header de mi página puede ser un componente? ¡Sí!
+¿El sidebar puede ser un componente? ¡Por su puesto!
+Y si tengo varios articulos en mi página… ¿Puedo convertirlos a componentes? ¡Por su pollo! 😄
+.
+Recuerda que todo puede ser un componente, y esto nos permite modularizar nuestro código. Es decir, podemos dividir y “aislar” cada parte de nuestra página. Si por alguna razón necesitaramos actualizar nuestro header (por ejemplo), bastaría con entrar al componente header modificar una pequeña línea y listo! Ya no tendríamos que buscar el header dentro de tooooodo nuestro HTML UwU.
+.
+👀 Otra ventaja de los componentes es que son reutilizables, es decir, puedes usarlos cuantas veces quieras. Por ejemplo, si tuvieras un sitio web sobre blogs, ya sabes que muchos blogs suelen tener una imagen, un título y una descripción. Entonces podríamos crear un componente con la estructura de nuestro blogpost y únicamente mandarle la información que necesitemos por cada blogpost y cada uno se crearía automáticamente!!
+
+clase 2**
+
+Recuerden que para inicializar un proyecto de react con configuraciones predeterminadas, esto dentro de la carpeta en la que estamos introducimos el siguiente código en la terminal:
+
+npx create-react-app ./
+Recuerden que el " ./ " hace referencia a la carpeta en la cual nos encontramos posicionados dentro de la terminal
+
+***clase 3
+Lo increíble de JSX es que ahora estamos practicamente escribiendo todo el HTML de nuestra aplicación dentro de JavaScript 😎. 
+A esto es a lo que nos referimos cuando decimos que “hoy en día nuestras aplicaciones web ya son puro JavaScript”.
+Aunque la verdadera forma de trabajar con JSX es usando la función createElement, esta suggar syntax nos permite verlo más parecido a un HTML (lo cual también lo hace más legible).
+ Y ahora casi que podemos mezclar HTML con JavaScript. 
+Es decir, podemos tener nuestra lógica de JavaScript y después en el render de JSX podemos simplemente usar variables (o usar directamente código JavaScript).
+.
+Of course… empiezan a entrar en juego las buenas practicas, ya que si miramos el hecho de que React nos permite combinar código JavaScript con nuestro HTML nos empezamos a dar cuenta que… 
+pues se va pareciendo un poquito a lo que hacian los programadores de antaño con HTML y PHP y el código acababa siendo una mezcla rara de dos lenguajes 😅. 
+También por eso es importante mantener separada la vista de nuestra lógica en nuestras aplicaciones. 
+En fin, el punto es que JSX nos permite escribir nuestra vista con una sintaxis muy parecida a HTML, pero con la oportunidad de incluir nuestro código JavaScript dentro, lo cual hace más fácil de entender qué hace cada componente 😉.
+
+/***Eventos en React*/
+☝ Por si no entendiste bien por qué a veces enviamos arrow functions y por qué otras veces no, aquí te lo explico:
+.
+Cualquier evento recibe sí o sí una función, es decir, debemos mandarle sí o sí una función para que React internamente pueda ejecutarla en cuanto dicho eventop ocurre.
+.
+El asunto, es que tiene que ser sí o sí una función que React pueda ejecutar, por eso no podemos mandar directamente un console.log() ni un alert(), porque aunque ambos son funciones, nosotros estamos ejecutándolas directamente al ponerles los paréntesis, pero nosotros no debemos ejecutarlas, nosotros solo debemos mandarlas y ya React se encargará de ejecutarlas.
+.
+Es por eso que mandamos arrow functions, porque estas son funciones que React puede ejecutar cuando quiera, y pues dentro de esas arrow functions está el código que queremos ejecutar cuando el evento suceda.
+.
+
+onClick={() => alert("React sí puede ejecutar esta arrow function cada que le de la gana OwO")}
+.
+Sin embargo, recordando que los eventos reciben funciones, yo puedo crear una variable que dentro guarde una función, por ejemplo:
+.
+
+const adentroTengoUnaFuncion = () => {
+    console.log("Hola");
+    console.log("Soy una función que está siendo guardada dentro de una variable UwU");
+}
+.
+Yo puedo ejecutar esta función sin problemas de esta forma adentroTengoUnaFuncion(), pero también puedo mandarsela a React para que él lo ejecute cuando quiera (en este caso, cuando el evento suceda):
+.
+
+onClick={adentroTengoUnaFuncion}
+.
+Nota como aquí mandamos la función sin paréntesis, esto es porque en el momento en el que le ponemos paréntesis seríamos nosotros quienes ejecutan la función, pero recuerda que nosotros no debemos ejecutar la función, sino React es quien tiene que ejecutarla. ¿Por qué? Pues porque si la ejecutamos nosotros, esta se va a ejecutar justo en el momento que esa línea de código sea leída por nuestra computadora, y nosotros no queremos eso, nosotros queremos que nuestra función se ejecute únicamente cuando el evento suceda, por eso la mandamos sin paréntesis, para que React pueda ejecutarla cuando dicho evento ocurra 😄
+.
+Peeeeeero, podemos hacer algo genial (y puede ponerse complicado), no veo razón para hacer esto, pero te lo explico por alimentar tu curiosidad jaja:
+.
+Sí podemos ejecutar nosotros la función 👀… Yo sé, esto es totalmente lo contrario a lo que te acabo de decir, pero checa esto 👇
+.
+Nosotros sí podemos hacer esto:
+.
+
+onClick={adentroTengoUnaFuncion()}
+Solamente sí nuestra función está así:
+.
+
+const adentroTengoUnaFuncion = () => {
+    return () => {
+        console.log("Hola");
+        console.log("Soy una función que está siendo guardada dentro de una variable UwU");
+    }
+}
+.
+Wait… what? Es simple 👀 Mi función adentroTengoUnaFuncion está retornando otra función, eso significa que, en el momento que mi código se ejecute, mi función adentroTengoUnaFuncion también se va a ejecutar inmediatamente, pero como esta función está retornando otra función, al final mi evento onClick acabará recibiendo la función que necesita para funcionar!!! OwO
+.
+¿Por qué haríamos esto? Seguramente tenga algún caso de uso, pero también es interesante saber que se pueden hacer este tipo de cosas UwU
+
+***/Manejo de Estado en React*/
+
+Para poder manejar los estados, vamos a necesitar de react el useState.
+
+//Si quieres importar todo React para usar useState
+import React from 'react';
+//Lo vas a usar de esta forma:
+const [searchValue, setSearchValue] = React.useState('')
+
+//Si quieres importar unicamente useState
+import { useState } from 'react';
+//Lo vas a usar de esta forma: 
+const [searchValue, setSearchValue] = useState('')
+useState tiene dos elementos:
+
+El valor (quien seria value)
+La funcion que cambia el valor (quien seria setValue)
+En useState es siempre necesario definir un valor como parametro. Puede ser un string, array, booleano o número
+
+const [searchValue, setSearchValue] = useState('')
+const [searchValue, setSearchValue] = useState(false)
+const [searchValue, setSearchValue] = useState(['Dorime', 'Ameno'])
+const [searchValue, setSearchValue] = useState(0)
+En la etiqueta donde vamos a manejar el evento, no debemos olvidar colocar el value que recibirá el valor de useState. Ejemplo:
+
+<input
+  className="TodoSearch"
+  placeholder="Ingresa un POYO Todo"
+  value={searchValue}
+	onChange={onSearchValueChange}
+/>
+Espero que les haya ayudado 🌟 .
+
+
+/***API de almacenamiento web**/
+
+localStorage: guarda la información en memoria incluso cuando el navegador se cierre y se reabra.
+
+sesionStorage: uarda la informacion en memoria mientras dure la sesión de la página.
+
+Storage.setItem()
+cuando recibe un nombre y valor, lo almacena o actualiza si ya existe.
+
+Ejemplo:
+
+storage.setItem(nombre, valor);
+
+Storage.getItem()
+Devuelve el valor cuando le pasamos el nombre.
+
+Ejemplo
+
+let userBackground = storage.getItem(userBackground); 
+
+// #000000
+
+Storage.removeItem()
+Elimina el valor almacenado cuando le pasamos el nombre:
+
+Ejemplo
+
+let userBackground = storage.removeItem(userBackground); 
+
+// Queda el valor por defecto en caso que exista, por lo ejemplo un background blanco.
+
+Storage.length
+Devuelve un entero que indica el número de elementos guardados en el objeto ** Storage.**
+
+Ejemplo
+
+function userSettings() {
+  localStorage.setItem('userBackground', '#000000');
+  localStorage.setItem('font', comic sans');
+  localStorage.setItem('fontSize', '18');
+
+  localStorage.length;
+
+ // 3
+}
+
+storage.clear();
+borra todos los registros guardados en local.
+
+*** Como aprendimos en el minuto 04:57, podemos enviarle un segundo argumento a la función useEffect para determinar cuándo ejecutamos o 
+no el código de nuestro efecto.
+.
+🔂 Podemos enviar un array vacío para decirle a nuestro efecto solo se ejecute una vez, 
+cuando recién hacemos el primer render de nuestro componente.
+.
+👂 O también podemos enviar un array con distintos elementos para decirle a nuestro efecto que no solo ejecute el efecto en el primer render, 
+sino también cuando haya cambios en esos elementos del array.
+.
+🔁 Si no enviamos ningún array como segundo argumento de nuestro efecto, 
+esta función se ejecutará cada vez que nuestro componente haga render (es decir, cada vez que haya cambios en cualquiera de nuestros estados).
+.
+.
+❓ ¿Cuál de estas opciones crees que debimos usar en nuestro efecto dentro de useLocalStorage?
+.
+Al menos por ahora, lo mejor habría sido enviar un array vacío para que nuestro efecto solo se ejecute una vez, 
+en el primer amado a nuestro custom hook / render de nuestro componente. 😌
+.
+Lastimosamente, olvidé escribir ese segundo parámetro durante la clase. 
+Esto hace que el código de mi efecto se ejecute cada vez que hay un cambio en el estado. Y como hacemos cambios a estado dentro del efecto, 
+entonces el efecto se ejecutará sin parar todo el tiempo que usemos la aplicación. 😱.
+Afortunadamente, como todo el código del useEffect está envuelto en un setTimeout, 
+cada ejecución del código de efecto tarda 1 segundo en volver a ejecutarse, por lo que la app no va a crashear. 😓
+.
+¡Este error podemos resolverlo en el siguiente curso de la saga! 🙏
+Incluso podemos profundizar muchísimo más en este tipo de errores en un curso de optimización, rendimiento y debugging con React.js. 💚
+.
+.
+💪 Mientras tanto, sé mejor que yo. No olvides escribir el segundo parámetro de tu efecto en useLocalStorage para que el código de tu efecto solo se ejecute una vez y no tengas problemas de rendimiento en tu versión de TODO Machine.
+
+***Aprovecho para aclarárselos:
+
+Una cosa es el render de React. Y otra cossa es el render en el navegador.
+
+React ejecuta el useEffect luego del render de React, pero antes del render en el navegador.
+
+En cambio, React ejecuta el useLayoutEffect luego del render de React y del render en el navegador.
+
+Pregunta de examen. 😄
+
+**Recuerda que cuando hay mas de un estado ya no vamos a pasar un array con todos ellos, si no un objeto
+
+¿Qué hace useEffect? Al usar este Hook, le estamos indicando a React que el componente tiene que hacer algo después de renderizarse. React recordará la función que le hemos pasado (nos referiremos a ella como nuestro “efecto”), y la llamará más tarde después de actualizar el DOM. En este efecto, actualizamos el título del documento, pero también podríamos hacer peticiones de datos o invocar alguna API imperativa.
+
+¿Por qué se llama a useEffect dentro del componente? Poner useEffect dentro del componente nos permite acceder a la variable de estado count (o a cualquier prop) directamente desde el efecto. No necesitamos una API especial para acceder a ella, ya que se encuentra en el ámbito de la función. Los Hooks aprovechan los closures de JavaScript y evitan introducir APIs específicas de React donde JavaScript ya proporciona una solución.
+
+¿Se ejecuta useEffect después de cada renderizado? ¡Sí! Por defecto se ejecuta después del primer renderizado y después de cada actualización. Más tarde explicaremos cómo modificar este comportamiento. En vez de pensar en términos de “montar” y “actualizar”, puede resultarte más fácil pensar en efectos que ocurren “después del renderizado”. React se asegura de que el DOM se ha actualizado antes de llevar a cabo el efecto.
+
+
+
+***React Context: estado compartido***
+
+Context
+Context provee una forma de pasar datos 
+a través del árbol de componentes sin tener 
+que pasar props manualmente en cada nivel.
+
+En una aplicación típica de React, 
+los datos se pasan de arriba hacia abajo (de padre a hijo) 
+a través de props, 
+pero esta forma puede resultar incómoda para ciertos tipos de props (por ejemplo, localización, el tema de la interfaz) 
+que son necesarias para muchos componentes dentro de una aplicación. Context proporciona una forma de compartir valores como estos entre componentes sin tener que pasar explícitamente una prop a través de cada nivel del árbol.
+
+Cuándo usar Context
+Context está diseñado para compartir datos que pueden considerarse “globales” para un árbol de componentes en React,
+ como el usuario autenticado actual, 
+ el tema o el idioma preferido. 
+ Por ejemplo, en el código a continuación, 
+ pasamos manualmente una prop de “tema” para darle estilo al componente Button:
